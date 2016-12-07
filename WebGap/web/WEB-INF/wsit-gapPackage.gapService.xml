@@ -14,7 +14,6 @@
         </operation>
     </portType>
     <binding name="gapServicePortBinding" type="tns:gapService">
-        <wsp1:PolicyReference URI="#gapServicePortBindingPolicy"/>
         <operation name="getLogin">
             <input></input>
             <output></output>
@@ -23,12 +22,4 @@
     <service name="gapService">
         <port name="gapServicePort" binding="tns:gapServicePortBinding"/>
     </service>
-    <wsp1:Policy wsu:Id="gapServicePortBindingPolicy">
-        <wsp1:ExactlyOne>
-            <wsp1:All>
-                <wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"/>
-                <wsrm1:RMAssertion/>
-            </wsp1:All>
-        </wsp1:ExactlyOne>
-    </wsp1:Policy>
 </definitions>
