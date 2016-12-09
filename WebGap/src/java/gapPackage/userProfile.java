@@ -9,33 +9,60 @@ import javax.persistence.Id;
 public class userProfile implements Serializable {
 
 	@Id
-	private final String id;
-	private String name;
-	private final String email;
+	//private final String id;
+	private static String name;
+	private static String emailU; //rimosso final
+        private static String passwordU; //rimosso final
+    
+        @Id
+        private Long id; //creato dai suggerimenti altrimenti dava errore
 	
-	public userProfile(String id, String email) {
+	public userProfile(String email, String password) {
             //this();
-            this.id = id;
-            this.email= email;
+            //this.email= email;
+            //this.password = password;
+            emailU = email;
+            passwordU = password;
+            String [] s= email.split("\\@");
+            name = s[0];
 	}
 	
-	public String getId() {
+	/*public String getId() {
 		return id;
-	}
+	}*/
 	
-	public String getEmail() {
-		return email;
+	public static String getEmail() {
+		return emailU;
 	}
+        
+        public static String getName(){
+            return name;
+        }
 	
+        public static String getPassword(){
+            return passwordU;
+        }
+        
+        //come parametro ha la mail che deve controllare, prof oppure studente?
 	public boolean getPosition(String email) {
-		
-		String uni_email = new String("unipi.it");
-		boolean prof = uni_email.equals(email);
-		if (prof) {
+            
+                String [] splits = email.split("\\@"); //divide a mail in 2 string, before and after a @
+		boolean prof = splits[1].equals("unipi.it"); //true if is a prof
+                
+		/*if (prof) {
                     return true;
                 }
 		else {
                     return false;
-		}
+		}*/
+                return prof;
         }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

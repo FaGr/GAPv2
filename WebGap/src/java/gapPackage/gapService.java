@@ -24,8 +24,9 @@ public class gapService {
     @WebMethod(operationName = "getLogin")
     public String getLogin(@WebParam(name = "email") String email, @WebParam(name = "password") String password) {
         //TODO write your implementation code here:
-       
-        valid_email=true;
+       userProfile utente = new userProfile(email, password);
+        
+        valid_email=utente.getPosition(email);
         if (valid_email) return "ok";
         else return "Hello";
     }
