@@ -30,15 +30,15 @@
                                         value="#{usermanager.lname}"
                                         required="true"/>
                            <h:message for="create:lname" style="color: red"/>
-                Username: <h:inputText id="username" 
+                Mail: <h:inputText id="mail" 
                                        requiredMessage="*"
-                                       value="#{usermanager.username}"
+                                       value="#{usermanager.mail}"
                                        required="true"/>
-                          <h:message for="create:username" style="color: red"/>
+                          <h:message for="mail" style="color: red"/>
                           
                          
-                Status:   <h:selectOneRadio value="#{usermanager.status}">
-                                <f:selectItem itemValue="@unipi.it" itemLabel="professore" />
+                Status:   <h:selectOneRadio id="status" requiredMessage="*" value="#{usermanager.status}" required="true">
+                                <f:selectItem itemValue="professore" itemLabel="professore" />
                                 <f:selectItem itemValue="studente" itemLabel="studente" />	   			
                              </h:selectOneRadio>  
                           <h:message for="create:status" style="color: red"/>

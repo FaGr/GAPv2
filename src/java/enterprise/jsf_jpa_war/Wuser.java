@@ -25,7 +25,7 @@ import static javax.persistence.GenerationType.IDENTITY;
  */
 @Entity
 @Table(name = "WUSER")
-@NamedQueries( {@NamedQuery(name = "Wuser.findById", query = "SELECT w FROM Wuser w WHERE w.id = :id"), @NamedQuery(name = "Wuser.findByFirstname", query = "SELECT w FROM Wuser w WHERE w.firstname = :firstname"), @NamedQuery(name = "Wuser.findByLastname", query = "SELECT w FROM Wuser w WHERE w.lastname = :lastname"), @NamedQuery(name = "Wuser.findByUsername", query = "SELECT w FROM Wuser w WHERE w.username = :username"), @NamedQuery(name = "Wuser.findByPassword", query = "SELECT w FROM Wuser w WHERE w.password = :password"), @NamedQuery(name = "Wuser.findBySince", query = "SELECT w FROM Wuser w WHERE w.since = :since")})
+@NamedQueries( {@NamedQuery(name = "Wuser.findById", query = "SELECT w FROM Wuser w WHERE w.id = :id"), @NamedQuery(name = "Wuser.findByFirstname", query = "SELECT w FROM Wuser w WHERE w.firstname = :firstname"), @NamedQuery(name = "Wuser.findByLastname", query = "SELECT w FROM Wuser w WHERE w.lastname = :lastname"), @NamedQuery(name = "Wuser.findByMail", query = "SELECT w FROM Wuser w WHERE w.mail = :mail"), @NamedQuery(name = "Wuser.findByPassword", query = "SELECT w FROM Wuser w WHERE w.password = :password"), @NamedQuery(name = "Wuser.findBySince", query = "SELECT w FROM Wuser w WHERE w.since = :since")})
 public class Wuser implements Serializable {
 
     @Id
@@ -42,8 +42,8 @@ public class Wuser implements Serializable {
     @Column(name = "STATUS", nullable = false)
     private String status;
 
-    @Column(name = "USERNAME", nullable = false)
-    private String username;
+    @Column(name = "MAIL", nullable = false)
+    private String mail;
 
     @Column(name = "PASSWORD", nullable = false)
     private String password;
@@ -60,12 +60,12 @@ public class Wuser implements Serializable {
         this.id = id;
     }
 
-    public Wuser(Integer id, String firstname, String lastname, String status, String username, String password) {
+    public Wuser(Integer id, String firstname, String lastname, String status, String mail, String password) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.status = status;
-        this.username = username;
+        this.mail = mail;
         this.password = password;
     }
 
@@ -101,12 +101,12 @@ public class Wuser implements Serializable {
         this.status = status;
     }
 
-    public String getUsername() {
-        return this.username;
+    public String getMail() {
+        return this.mail;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     public String getPassword() {

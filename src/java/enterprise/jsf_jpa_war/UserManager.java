@@ -13,6 +13,8 @@ import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * <p>A simple managed bean to mediate between the user
@@ -42,7 +44,7 @@ public class UserManager {
     /**
      * <p>User properties.</p>
      */
-    private String username;
+    private String mail;
     private String password;
     private String passwordv;
     private String fname;
@@ -51,12 +53,12 @@ public class UserManager {
     
     // -------------------------------------------------------------- Properties
     
-    public String getUsername() {
-        return username;
+    public String getMail() {
+        return mail;
     }
     
-    public void setUsername(String username) {
-        this.username = username;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
     
     public String getStatus(){
@@ -67,8 +69,9 @@ public class UserManager {
         this.status = status;
     }
     
+    //return true se e' professore
     public boolean checkStatus(){
-        return (this.status.equals("studente"));//ritorna true se non e' studente
+        return (this.status.equals("professore"));
     }//quindi disabled=true, studente non puo' prenotare
     
     public String getPassword() {
@@ -121,10 +124,17 @@ public class UserManager {
         FacesContext context = FacesContext.getCurrentInstance();
         Wuser user = getUser();
         if (user != null) {
-            if (!user.getPassword().equals(password) || !user.getStatus().equals(status)) {
+            if (!user.getPassword().equals(password)) {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                                            "Login Failed!",
                                            "The password specified is not correct.");
+                context.addMessage(null, message);
+                return null;
+            }
+            else if(!user.getStatus().equals(status)){
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                           "Login Failed!",
+                                           "The status is wrong.");
                 context.addMessage(null, message);
                 return null;
             }
@@ -134,8 +144,8 @@ public class UserManager {
         } else {           
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "Login Failed!",
-                    "Username '"
-                    + username
+                    "Mail '"
+                    + mail
                     +
                     "' does not exist.");
             context.addMessage(null, message);
@@ -161,12 +171,39 @@ public class UserManager {
                 context.addMessage(null, message);
                 return null;
             }
+            
+            //validate a mail
+            EmailValidator truemail = new EmailValidator();
+            if(!truemail.validate(mail)){
+                FacesMessage message = new FacesMessage("The specified mail is not valid.  Please try again");
+                context.addMessage(null, message);
+                return null;
+            }
+            
+            ///////////////////////////////////////////////////////////////////////////////////////////
+            
+            String [] splits = mail.split("\\@"); //divide a mail in 2 string, before and after a @
+            boolean mailprof = splits[1].equals("unipi.it"); //true if is a prof
+            
+            boolean prof = status.equals("professore");//true se professore
+            //se sono prof la mail deve avere dominio unipi.it
+            //TODO SISTEMARE: non va bene il controllo
+            if(prof){//se sono professore
+                if(!mailprof){//ma non ho messo un dominio da prof
+                   FacesMessage message = new FacesMessage("The specified mail is not valid, if you are prof must are @unipi.it.  Please try again");
+                   context.addMessage(null, message);
+                   return null;
+                }
+            }
+            
+            ///////////////////////////////////////////////////////////////////////////////////////////
+            
             wuser = new Wuser();
             wuser.setFirstname(fname);
             wuser.setLastname(lname);
+            wuser.setMail(mail);
             wuser.setStatus(status);
             wuser.setPassword(password);
-            wuser.setUsername(username);
             wuser.setSince(new Date());
             try {
                 utx.begin();
@@ -185,10 +222,10 @@ public class UserManager {
             }
         } else {           
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                                                    "Username '"
-                                                      + username 
+                                                    "Mail '"
+                                                      + mail 
                                                       + "' already exists!  ",
-                                                    "Please choose a different username.");
+                                                    "Please choose a different mail.");
             context.addMessage(null, message);
             return null;
         }        
@@ -219,18 +256,50 @@ public class UserManager {
      * based on the provided user name.</p>
      *
      * @return a <code>Wuser</code> object associated with the current
-     *  username, otherwise, if no <code>Wuser</code> can be found,
+     *  mail, otherwise, if no <code>Wuser</code> can be found,
      *  returns <code>null</code>
      */
     private Wuser getUser() {
         try {
             Wuser user = (Wuser)
-            em.createNamedQuery("Wuser.findByUsername").
-                    setParameter("username", username).getSingleResult();
+            em.createNamedQuery("Wuser.findByMail").
+                    setParameter("mail", mail).getSingleResult();
             return user; 
         } catch (NoResultException nre) {
             return null;
         }
     }
    
+}
+
+
+//-------------------------------------------------------------------
+// validate mail
+
+class EmailValidator {
+
+	private Pattern pattern;
+	private Matcher matcher;
+
+	private static final String EMAIL_PATTERN =
+		"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+		+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+	public EmailValidator() {
+		pattern = Pattern.compile(EMAIL_PATTERN);
+	}
+
+	/**
+	 * Validate hex with regular expression
+	 *
+	 * @param hex
+	 *            hex for validation
+	 * @return true valid hex, false invalid hex
+	 */
+	public boolean validate(final String hex) {
+
+		matcher = pattern.matcher(hex);
+		return matcher.matches();
+
+	}
 }

@@ -22,12 +22,12 @@
                     showDetail="true"/>
         <h:form id="login">
             <h:panelGrid columns="2" border="0">
-                Username: <h:inputText id="username" 
-                                       value="#{usermanager.username}"/>        
+                Mail: <h:inputText id="mail" 
+                                       value="#{usermanager.mail}"/>        
                 Password: <h:inputSecret id="password"
                                          value="#{usermanager.password}"/>
                 <h:selectOneRadio value="#{usermanager.status}">
-                        <f:selectItem itemValue="@unipi.it" itemLabel="professore" />
+                        <f:selectItem itemValue="professore" itemLabel="professore" />
                         <f:selectItem itemValue="studente" itemLabel="studente" />	   			
                 </h:selectOneRadio>
             </h:panelGrid>
