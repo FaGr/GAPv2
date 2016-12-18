@@ -16,16 +16,16 @@
     <body>
         <f:view>
             <h1><h:outputText value="GAP unipi" /></h1>
+             Welcome ${user.firstname} ${user.lastname}.
             <p>Seleziona l'aula e l'operazione, poi clicca su submit</p>
-            Welcome ${user.firstname} ${user.lastname},  You've been registered since ${user.since}.
             <h:form>
                 
               <form action="">
                 <fieldset>
                     <legend>Cosa vuoi fare?</legend>
                     Richiedi aula <input type="radio" name="linguaggio" value="html"/>
-                    <!--RIMUOVERE LA RIGA SUCCESSIVA (ANCHE SE COMMENTATA PER FAR FUNZIONARE LA PAGINA WEB)-->
-                    <!--Prenota aula <input type="radio" name="linguaggio" value="css" disabled="${usermanager.checkStatus()}"/>-->
+                    <%--RIMUOVERE LA RIGA SUCCESSIVA (ANCHE SE COMMENTATA, PER FAR FUNZIONARE LA PAGINA WEB)--%>
+                    <%--Prenota aula <input type="radio" name="linguaggio" value="css" disabled="${usermanager.checkStatus()}"/> --%>
                     Annulla prenotazione aula <input type="radio" name="linguaggio" value="javascript"/>
                 </fieldset>
             </form>

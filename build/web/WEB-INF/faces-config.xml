@@ -37,7 +37,7 @@
     
     <lifecycle>
         <phase-listener>
-            enterprise.jsf_jpa_war.AuthenticationPhaseListener
+            enterprise.jsf_jpa_war.authenticationPhaseListener
         </phase-listener>
     </lifecycle>
     <managed-bean>

@@ -26,10 +26,11 @@
                                        value="#{usermanager.mail}"/>        
                 Password: <h:inputSecret id="password"
                                          value="#{usermanager.password}"/>
-                <h:selectOneRadio value="#{usermanager.status}">
-                        <f:selectItem itemValue="professore" itemLabel="professore" />
-                        <f:selectItem itemValue="studente" itemLabel="studente" />	   			
-                </h:selectOneRadio>
+                <%--<h:selectOneRadio value="#{usermanager.status}">
+                        <f:selectItem itemValue="Professore" itemLabel="Professore" />
+                        <f:selectItem itemValue="Studente" itemLabel="Studente" />	   			
+                </h:selectOneRadio> 
+                --%>
             </h:panelGrid>
             <h:commandButton id="submit" 
                              type="submit"

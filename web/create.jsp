@@ -38,8 +38,8 @@
                           
                          
                 Status:   <h:selectOneRadio id="status" requiredMessage="*" value="#{usermanager.status}" required="true">
-                                <f:selectItem itemValue="professore" itemLabel="professore" />
-                                <f:selectItem itemValue="studente" itemLabel="studente" />	   			
+                                <f:selectItem itemValue="Professore" itemLabel="Professore" />
+                                <f:selectItem itemValue="Studente" itemLabel="Studente" />	   			
                              </h:selectOneRadio>  
                           <h:message for="create:status" style="color: red"/>
                 Password: <h:inputSecret id="password"    
@@ -47,11 +47,11 @@
                                          value="#{usermanager.password}"
                                          required="true"/>
                           <h:message for="create:password" style="color: red"/>
-                Password (verify): <h:inputSecret id="passwordv"   
+                          <%-- Password (verify): <h:inputSecret id="passwordv"   
                                                   requiredMessage="*"
                                                   value="#{usermanager.passwordv}"
                                                   required="true"/>
-                                   <h:message for="create:passwordv" style="color: red"/>
+                                   <h:message for="create:passwordv" style="color: red"/> --%>
             </h:panelGrid>
             <h:commandButton id="submit" 
                              value="Create"
