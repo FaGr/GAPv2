@@ -18,7 +18,7 @@ import javax.faces.event.PhaseListener;
  * the listener will move the user to the login page.</p>
  * @author rlubke
  */
-public class AuthenticationPhaseListener implements PhaseListener {
+public class authenticationPhaseListener implements PhaseListener {
     
     /**
      * <p>The outcome to trigger navigation to the login page.</p>
@@ -78,7 +78,7 @@ public class AuthenticationPhaseListener implements PhaseListener {
      */
     private boolean userExists(FacesContext context) {
         ExternalContext extContext = context.getExternalContext();
-        return (extContext.getSessionMap().containsKey(UserManager.USER_SESSION_KEY));
+        return (extContext.getSessionMap().containsKey(userManagerBean.USER_SESSION_KEY));
     }
     
     /**

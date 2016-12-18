@@ -15,17 +15,15 @@ import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 /**
- * <p>A simple managed bean to mediate between the user
- * and the persistence layer.</p>
- * @author rlubke
+ * <p>A simple managed bean to mediate between the user and the persistence layer.</p>
+ * @author anon
  */
-public class UserManager {
+public class userManagerBean {
     
     /**
      * <p>The key for the session scoped attribute holding the
-     * appropriate <code>Wuser</code> instance.</p>
+     * appropriate <code>webAppUser</code> instance.</p>
      */
     public static final String USER_SESSION_KEY = "user";
     
@@ -122,7 +120,7 @@ public class UserManager {
      */
     public String validateUser() {   
         FacesContext context = FacesContext.getCurrentInstance();
-        Wuser user = getUser();
+        webAppUser user = getUser();
         if (user != null) {
             if (!user.getPassword().equals(password)) {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -154,9 +152,9 @@ public class UserManager {
     }
     
     /**
-     * <p>Creates a new <code>Wuser</code>.  If the specified user name exists
-     * or an error occurs when persisting the Wuser instance, enqueue a message
-     * detailing the problem to the <code>FacesContext</code>.  If the 
+     * <p>Creates a new <code>webAppUser</code>.  If the specified user name exists
+ or an error occurs when persisting the webAppUser instance, enqueue a message
+ detailing the problem to the <code>FacesContext</code>.  If the 
      * user is created, move the user back to the login view.</p>
      *
      * @return <code>login</code> if the user is created, otherwise
@@ -164,7 +162,7 @@ public class UserManager {
      */
     public String createUser() {
         FacesContext context = FacesContext.getCurrentInstance();
-        Wuser wuser = getUser();
+        webAppUser wuser = getUser();
         if (wuser == null) {
             if (!password.equals(passwordv)) {
                 FacesMessage message = new FacesMessage("The specified passwords do not match.  Please try again");
@@ -198,7 +196,7 @@ public class UserManager {
             
             ///////////////////////////////////////////////////////////////////////////////////////////
             
-            wuser = new Wuser();
+            wuser = new webAppUser();
             wuser.setFirstname(fname);
             wuser.setLastname(lname);
             wuser.setMail(mail);
@@ -252,16 +250,16 @@ public class UserManager {
     
     
     /**
-     * <p>This will attempt to lookup a <code>Wuser</code> object
+     * <p>This will attempt to lookup a <code>webAppUser</code> object
      * based on the provided user name.</p>
      *
-     * @return a <code>Wuser</code> object associated with the current
-     *  mail, otherwise, if no <code>Wuser</code> can be found,
+     * @return a <code>webAppUser</code> object associated with the current
+     *  mail, otherwise, if no <code>webAppUser</code> can be found,
      *  returns <code>null</code>
      */
-    private Wuser getUser() {
+    private webAppUser getUser() {
         try {
-            Wuser user = (Wuser)
+            webAppUser user = (webAppUser)
             em.createNamedQuery("Wuser.findByMail").
                     setParameter("mail", mail).getSingleResult();
             return user; 

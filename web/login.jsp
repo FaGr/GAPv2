@@ -15,7 +15,7 @@
     </head>
     <body>
 
-    <h1>Per poter accedere è necessario il login</h1>
+    <h1>Per poter accedere è necessario effettuare il login</h1>
     
     <f:view>
         <h:messages style="color: red"

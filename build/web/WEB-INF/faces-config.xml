@@ -42,9 +42,9 @@
     </lifecycle>
     <managed-bean>
         <managed-bean-name>usermanager</managed-bean-name>
-        <managed-bean-class>enterprise.jsf_jpa_war.UserManager</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>      
-    </managed-bean>
+        <managed-bean-class>enterprise.jsf_jpa_war.userManagerBean</managed-bean-class>      
+    
+        <managed-bean-scope>request</managed-bean-scope></managed-bean>
     
     <navigation-rule>
         <navigation-case>
