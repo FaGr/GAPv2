@@ -30,7 +30,6 @@
   THE POSSIBILITY OF SUCH DAMAGE.
 -->
 <sun-web-app error-url="">
-  <context-root>/JsfJpa</context-root>
   <class-loader delegate="true"/>
   <jsp-config>
     <property name="classdebuginfo" value="true">

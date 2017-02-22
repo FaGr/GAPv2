@@ -1,0 +1,2 @@
+enterprise.jsf_jpa_war.userManagerBean
+enterprise.jsf_jpa_war.EmailValidator

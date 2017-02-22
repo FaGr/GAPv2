@@ -1,4 +1,3 @@
-
 <%@page contentType="text/html"%>
 <%@page pageEncoding="UTF-8"%>
 
@@ -23,10 +22,9 @@
               <form action="">
                 <fieldset>
                     <legend>Cosa vuoi fare?</legend>
-                    Richiedi aula <input type="radio" name="linguaggio" value="html"/>
-                    <%--RIMUOVERE LA RIGA SUCCESSIVA (ANCHE SE COMMENTATA, PER FAR FUNZIONARE LA PAGINA WEB)--%>
-                    <%--Prenota aula <input type="radio" name="linguaggio" value="css" disabled="${usermanager.checkStatus()}"/> --%>
-                    Annulla prenotazione aula <input type="radio" name="linguaggio" value="javascript"/>
+                        <h:commandButton id="crea_csv" value="Crea csv" action="#{csvwritereadtest.prova}"/>
+                        <h:commandButton id="prenota" value="Prenota aula" action="#{aula.prenota(aula.getNomeaula(), user.getStatus(), user.getMail())}"/>
+                        <h:commandButton id="cancella" value="Cancella prenotazione" action="#{aula.cancella(aula.getNomeaula(), user.getStatus(), user.getMail())}"/>
                 </fieldset>
             </form>
                 

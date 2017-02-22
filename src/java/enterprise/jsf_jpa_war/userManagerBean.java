@@ -158,7 +158,7 @@ public class userManagerBean {
             /**
             * checks if the inserted mail is a valid mail
             */
-            EmailValidator truemail = new EmailValidator();
+            EmailValidator_ truemail = new EmailValidator_();
             if(!truemail.validate(mail)){
                 FacesMessage message = new FacesMessage("The specified mail is "
                                               + "not valid.  Please try again");

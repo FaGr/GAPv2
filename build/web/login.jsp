@@ -31,6 +31,11 @@
                         <f:selectItem itemValue="Studente" itemLabel="Studente" />	   			
                 </h:selectOneRadio> 
                 --%>
+                <!--rimuovere Ratio -->
+                <h:selectOneRadio value="#{usermanager.status}">
+                        <f:selectItem itemValue="professore" itemLabel="professore" />
+                        <f:selectItem itemValue="studente" itemLabel="studente" />	   			
+                </h:selectOneRadio>
             </h:panelGrid>
             <h:commandButton id="submit" 
                              type="submit"
